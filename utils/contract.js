@@ -132,5 +132,8 @@ const abi = [
     }
 ]
 
-const stakingContract = new web3.eth.Contract(abi , address);
-export default stakingContract;
+function getContract(){
+    const stakingContract = new web3.eth.Contract(abi , address);
+    return stakingContract;
+}
+export default getContract;
