@@ -203,6 +203,35 @@ export default function StakingInterface() {
         setTotalStake(totalstake);
     }
 
+    const handleStake = async () => {
+        if (!contract || !web3 || !account || !amount) {
+          alert("Please enter a valid amount and connect your wallet.");
+          return;
+        }
+      
+        try {
+          await contract.methods.stake(20000000000000000).send({
+            from: account,
+            value: 20000000000000000,
+          });
+          alert("Staking successful!");
+        } catch (error) {
+          console.error("Staking failed:", error);
+          alert("Staking failed. Check console for details.");
+        }
+    };
+
+    const handleUnstake = async () => {
+        if (!contract || !account) return;
+        await contract.methods.unstake(20000000000000000).send({ from: account });
+    };
+
+    const getRewards = async () => {
+        if (!contract || !account) return;
+        const res = await contract.methods.getRewards().call({ from: account });
+        console.log(res);
+    };
+
     return(
         <div>
             <h1>Eth Staking DApp : {totalStake}</h1>
@@ -216,10 +245,18 @@ export default function StakingInterface() {
                 <button onClick={connectWallet}>Connect Wallet</button>
             )}
             </div>
-
-            
-
             <button onClick={getTotalStake} >Get Total Stake</button>
+
+            <input type="text" 
+            placeholder="Amount in Eth"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}/>
+
+            <button onClick={handleStake} >Stake</button>
+            <br />
+            <button onClick={handleUnstake} >UnStake</button>
+            <br />
+            <button onClick={getRewards} >get Rewards</button>
         </div>
     )
 }
