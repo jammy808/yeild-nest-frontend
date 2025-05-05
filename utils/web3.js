@@ -1,9 +1,12 @@
 import Web3 from "web3";
 
-let web3;
-
-if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
-    web3 = new Web3(window.ethereum);
+function getWeb3Instance() {
+    let web3;
+    if(typeof window !== "undefined" && typeof window.ethereum !== "undefined"){
+        web3 = new Web3(window.ethereum);
+        return web3;
+    }
+    return null;
 }
 
-export default web3;
+export default getWeb3Instance;
