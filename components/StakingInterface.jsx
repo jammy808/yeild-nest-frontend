@@ -232,6 +232,12 @@ export default function StakingInterface() {
         console.log(res);
     };
 
+    const claimRewards = async () => {
+        if (!contract || !account) return;
+        const res = await contract.methods.claimRewards().send({ from: account });
+        console.log(res);
+    };
+
     return(
         <div>
             <h1>Eth Staking DApp : {totalStake}</h1>
@@ -257,6 +263,8 @@ export default function StakingInterface() {
             <button onClick={handleUnstake} >UnStake</button>
             <br />
             <button onClick={getRewards} >get Rewards</button>
+            <br />
+            <button onClick={claimRewards} >claim Rewards</button>
         </div>
     )
 }
