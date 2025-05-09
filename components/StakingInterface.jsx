@@ -221,9 +221,10 @@ export default function StakingInterface() {
         }
     };
 
+    // add a input bar for unstake
     const handleUnstake = async () => {
         if (!contract || !account) return;
-        await contract.methods.unstake(20000000000000000).send({ from: account });
+        await contract.methods.unstake(amount).send({ from: account });
     };
 
     const getRewards = async () => {
