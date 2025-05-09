@@ -135,7 +135,7 @@ const abi = [
 ]
 
 export default function StakingInterface() {
-    const [amount , setAmount] = useState("");
+    const [amount , setAmount] = useState(0);
     const [account, setAccount] = useState(null);
     const [accountsList, setAccountsList] = useState([]);
     const [contract , setContract] = useState("");
@@ -210,9 +210,9 @@ export default function StakingInterface() {
         }
       
         try {
-          await contract.methods.stake(20000000000000000).send({
+          await contract.methods.stake(amount).send({
             from: account,
-            value: 20000000000000000,
+            value: amount,
           });
           alert("Staking successful!");
         } catch (error) {
