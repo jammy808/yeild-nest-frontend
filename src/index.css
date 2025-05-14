@@ -1,0 +1,102 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 36% 10%;
+    --foreground: 210 40% 96%;
+
+    --card: 224 40% 14%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 224 40% 14%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 214 100% 70%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 224 40% 25%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 224 35% 20%;
+    --muted-foreground: 215 20% 70%;
+
+    --accent: 195 100% 60%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 224 40% 20%;
+    --input: 224 40% 20%;
+    --ring: 214 100% 70%;
+
+    --radius: 0.6rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image: 
+      radial-gradient(
+        circle at top right,
+        hsl(210, 70%, 25%) 0%,
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at bottom left,
+        hsl(240, 70%, 25%) 0%,
+        transparent 45%
+      );
+    background-size: 100% 100%;
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .eth-card {
+    @apply bg-card/40 backdrop-blur-md border border-primary/20 rounded-lg shadow-xl relative overflow-hidden;
+  }
+  
+  .eth-card::after {
+    @apply content-[''] absolute -inset-[150px] w-[200px] h-[200px] z-[-1] bg-primary/20 animate-[spin_10s_linear_infinite] blur-3xl;
+  }
+  
+  .glow {
+    @apply relative;
+  }
+  
+  .glow::after {
+    @apply content-[''] absolute inset-0 -z-10 bg-primary/30 rounded-lg blur-xl opacity-75;
+  }
+  
+  .blue-gradient-text {
+    @apply bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent;
+  }
+  
+  .blue-gradient-bg {
+    @apply bg-gradient-to-r from-blue-600 to-blue-800;
+  }
+  
+  .shimmer {
+    @apply relative overflow-hidden;
+  }
+  
+  .shimmer::before {
+    @apply content-[''] absolute top-0 -left-[100%] w-[100%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent;
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    100% {
+      left: 100%;
+    }
+  }
+}
