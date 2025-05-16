@@ -84,6 +84,10 @@
   .blue-gradient-bg {
     @apply bg-gradient-to-r from-blue-600 to-blue-800;
   }
+
+  .sky-gradient-bg {
+    @apply bg-gradient-to-r from-blue-400 to-cyan-300;
+  }
   
   .shimmer {
     @apply relative overflow-hidden;
