@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import { useState } from "react";
 import Header from "@/components/Header";
 import StakeForm from "@/components/StakeForm";
 import RewardsPanel from "@/components/RewardsPanel";
@@ -9,7 +8,7 @@ const Index = () => {
   const [connected, setConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
 
-  // Function to handle connection status change
+
   const handleConnectionChange = (status: boolean, address: string) => {
     setConnected(status);
     setWalletAddress(address);
