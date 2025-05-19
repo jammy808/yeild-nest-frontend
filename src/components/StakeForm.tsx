@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
@@ -14,10 +14,17 @@ interface StakeFormProps {
   account: string | null;
 }
 
+interface UserInfo {
+  stakedAmount : string,
+  rewardDebt : string,
+  lastUpdate : string
+}
+
 const StakeForm = ({ connected , contract, web3, account }: StakeFormProps) => {
   const [amount, setAmount] = useState("");
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [userStakes , setUserStakes] = useState("-");
 
   const handleStake = async () => {
     if (!connected || !contract || !web3 || !account) {
@@ -112,6 +119,25 @@ const StakeForm = ({ connected , contract, web3, account }: StakeFormProps) => {
     setAmount("1");
   };
 
+  const getStakes = async () => {
+    if (!connected || !contract || !web3 || !account) {
+      return;
+    }
+
+    try {
+      const user: UserInfo = await contract.methods.userInfo(account).call();
+      const stakedAmount = web3.utils.fromWei(user.stakedAmount, "ether"); // convert from wei to eth
+      console.log("Staked Amount:", stakedAmount);
+      setUserStakes(stakedAmount);
+    } catch (error) {
+      console.error("Error fetching staked amount:", error);
+    }
+  }
+
+  useEffect(() => {
+    getStakes();
+  }, [account])
+
   return (
     <div className="eth-card p-4 md:p-6 space-y-4 md:space-y-6 max-w-md w-full mx-auto">
       <h2 className="text-xl md:text-2xl font-bold text-center blue-gradient-text">Stake ETH</h2>
@@ -163,8 +189,8 @@ const StakeForm = ({ connected , contract, web3, account }: StakeFormProps) => {
       
       <div className="pt-3 md:pt-4 border-t border-primary/10">
         <div className="bg-secondary/30 p-3 md:p-4 rounded-lg backdrop-blur-sm">
-          <p className="text-xs md:text-sm text-muted-foreground mb-1 md:mb-2">Estimated APY</p>
-          <p className="text-lg md:text-xl font-bold text-accent">5.2%</p>
+          <p className="text-xs md:text-sm text-muted-foreground mb-1 md:mb-2" onClick={getStakes}>Your Stakes</p>
+          <p className="text-lg md:text-xl font-bold text-accent">{userStakes} ETH</p>
         </div>
       </div>
     </div>
