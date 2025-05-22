@@ -11,7 +11,9 @@ import { Contract } from "web3-eth-contract";
 import getWeb3Instance from "../utils/web3";
 
 const address = "0x445d0c5Df4eeF1037F54F956E55847d009630a69";
+const tokenAddress = "0x5d41a515C222f94323e5f682095E73d096B5e372";
 import contractAbi from "../utils/contract.json" with {type : 'json'};
+import tokenAbi from "../utils/token.json" with {type : 'json'};
 
 declare global {
   interface Window {
@@ -27,6 +29,7 @@ import { Wallet } from "lucide-react";
 const Index = () => {
   const [web3, setWeb3] = useState<Web3 | null>(null);
   const [contract, setContract] = useState<Contract<AbiItem[]> | null>(null);
+  const [token, setToken] = useState<Contract<AbiItem[]> | null>(null);
   const [account, setAccount] = useState<string | null>(null);
   const [accountsList, setAccountsList] = useState<string[]>([]);
   const [totalStake, setTotalStake] = useState<string>("");
@@ -43,6 +46,9 @@ const Index = () => {
 
     const contractInstance = new web3Instance.eth.Contract(contractAbi as AbiItem[], address);
     setContract(contractInstance);
+
+    const tokenInstance = new web3Instance.eth.Contract(tokenAbi as AbiItem[] , tokenAddress);
+    setToken(tokenInstance);
 
     connectWallet();
   }, []);
@@ -73,7 +79,7 @@ const Index = () => {
 
       toast({
         title: "Wallet Connected",
-        description: `Connected to ${accounts[0]}`,
+        description: `Connected to ${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`,
       });
       setConnected(true);
     } catch (err) {
@@ -110,8 +116,8 @@ const Index = () => {
   const Header = () => {
 
     return (
-      <header className="py-4 md:py-6 px-4 md:px-6 backdrop-blur-sm border-b border-primary/10">
-        <div className="container mx-auto flex items-center justify-between">
+      <header className="py-4 md:py-6 backdrop-blur-sm border-b border-primary/10">
+        <div className="w-full lg:px-8 px-2 mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2 md:gap-3">
             <div className="h-8 w-8 md:h-10 md:w-10 rounded-full blue-gradient-bg flex items-center justify-center shadow-lg shadow-primary/20">
               <span className="text-white font-bold text-base md:text-lg">YN</span>
@@ -156,7 +162,7 @@ const Index = () => {
             <RewardsPanel connected={connected} contract={contract} web3={web3} account={account} />
           </div>
           
-          <StakingStats contract={contract} web3={web3} />
+          <StakingStats contract={contract} token={token} web3={web3} />
         </div>
       </main>
       
