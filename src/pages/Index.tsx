@@ -39,7 +39,11 @@ const Index = () => {
   useEffect(() => {
     const web3Instance = getWeb3Instance();
     if (!web3Instance) {
-      alert("Please install MetaMask.");
+      toast({
+        title: "Wallet Not fount",
+        description: "Please install a wallet.",
+        variant: "destructive",
+      });
       return;
     }
     setWeb3(web3Instance);
@@ -68,7 +72,11 @@ const Index = () => {
 
     // connect wallet logic
     if (typeof window.ethereum === "undefined") {
-      alert("Please install MetaMask.");
+       toast({
+        title: "Wallet Not fount",
+        description: "Please install a wallet.",
+        variant: "destructive",
+      });
       return;
     }
 
