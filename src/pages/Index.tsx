@@ -41,7 +41,7 @@ const Index = () => {
     if (!web3Instance) {
       toast({
         title: "Wallet Not fount",
-        description: "Please install a wallet.",
+        description: "Inorder to stake your Eth you will need a wallet. Please install a wallet.",
         variant: "destructive",
       });
       return;
@@ -74,7 +74,7 @@ const Index = () => {
     if (typeof window.ethereum === "undefined") {
        toast({
         title: "Wallet Not fount",
-        description: "Please install a wallet.",
+        description: "Inorder to stake your Eth you will need a wallet. Please install a wallet.",
         variant: "destructive",
       });
       return;
@@ -161,7 +161,7 @@ const Index = () => {
               Yield Nest
             </h1>
             <p className="text-base md:text-lg max-w-2xl mx-auto text-muted-foreground">
-              Stake your ETH securely and earn rewards with our trusted staking platform.
+              Stake your ETH securely on Sepolia and earn rewards.
             </p>
           </div>
           
