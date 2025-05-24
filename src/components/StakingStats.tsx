@@ -12,8 +12,8 @@ interface StatsProps {
 }
 
 const StakingStats = ({ contract,token ,web3 }: StatsProps) => {
-  const [totalStake, setTotalStake] = useState<string>("");
-  const [totalRewards , setTotalRewards] = useState<string>("");
+  const [totalStake, setTotalStake] = useState<string>("-");
+  const [totalRewards , setTotalRewards] = useState<string>("-");
 
   const getTotalStake = async () => {
     if (!contract || !web3) return;
