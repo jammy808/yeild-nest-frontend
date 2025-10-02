@@ -1,16 +1,21 @@
 Yield-Nest — a dApp where users can securely stake their ETH and earn JamCoin tokens as yield, powered by a custom proxy staking system.
 
 💡 𝗖𝗼𝗿𝗲 𝗔𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲 :
- • A proxy staking contract delegates calls to an implementation contract for 
- upgradeability
+
+ • A proxy staking contract delegates calls to an implementation contract for upgradeability
+ 
  • A custom ERC-20 reward token (JamCoin) is minted as staking rewards
+ 
 
 🔧 𝗧𝗲𝗰𝗵 𝗦𝘁𝗮𝗰𝗸 :
+
  • Frontend: Next.js, React, Tailwind CSS, shadcn/ui, Web3.js
- • Smart Contracts: Solidity, Foundry (for development, testing & 
- deployment)
+ 
+ • Smart Contracts: Solidity, Foundry (for development, testing & deployment)
+ 
 
 📜 𝗖𝗼𝗻𝘁𝗿𝗮𝗰𝘁𝘀 𝗼𝗻 𝗦𝗲𝗽𝗼𝗹𝗶𝗮 𝗧𝗲𝘀𝘁𝗻𝗲𝘁 :
+
  • Staking Logic (Implementation): 0x8ec4F8f4D5463b9456e03F49896F02D1Dc2db7CF
  
  • Proxy Staking Contract: 0x445d0c5Df4eeF1037F54F956E55847d009630a69
